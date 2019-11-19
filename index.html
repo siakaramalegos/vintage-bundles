@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>reveal-md</title>
+    <link rel="stylesheet" href="./css/reveal.css" />
+    <link rel="stylesheet" href="./_assets/style.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/github.css" />
+    <link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+
+<!-- .slide: data-background="./images/vintage-suitcases.jpg" -->
+<h1 class="title dark-background"><span class="highlighter">Vintage Bundles</span></h1>
+<h2 class="subtitle dark-background"><span class="highlighter">Sia Karamalegos</span></h2>
+
+<aside class="notes"><p>Photo by Erwan Hesry on Unsplash <a href="https://unsplash.com/photos/Q34YB7yjAxA">https://unsplash.com/photos/Q34YB7yjAxA</a></p>
+</aside></script></section><section  data-markdown><script type="text/template">
+## hi, i'm sia
+
+⚡ 👩🏻‍💻 🇬🇷 🐶 🐺 🎨 📓 ✈️
+
+<img src="./images/sia.gif" alt="Sia at Mardi Gras" height="450px" style="border:none;">
+</script></section><section  data-markdown><script type="text/template">
+## Resources for this talk
+
+[bit.ly/vintagebundles](http://bit.ly/vintagebundles)
+</script></section><section  data-markdown><script type="text/template">
+<!-- .slide: data-background="./images/vote_1200.jpg" -->
+<h1 class="dark-background"><span class="highlighter">Who uses ES6+ features?</span></h1>
+
+<aside class="notes"><p>arrow functions, modules, async/await</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+<!-- .slide: data-background="./images/vote_1200.jpg" -->
+<h1 class="dark-background"><span class="highlighter">Who transpiles ES6+ to ES5?</span></h1>
+</script></section><section  data-markdown><script type="text/template">
+## Let's take a peek into transpiling...
+
+[babeljs.io/repl](https://babeljs.io/repl)
+
+<small>[Character counter](https://wordcounter.net/character-count)</small>
+
+<aside class="notes"><p>Copy-paste a React element, explain that Babel inside webpack build will transpile all your JS for you. Ask what they notice, then count characters</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+<!-- .slide: data-background="./images/vote_1200.jpg" -->
+<h1 class="dark-background"><span class="highlighter">What percentage of browsers don't support ES6?</span></h1>
+
+<aside class="notes"><p>How would we check this?</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+**The HTML `<script>` tag accepts helpful attributes:**
+
+- `type=module` - this is ES6+ code (and is automatically deferred)
+- `nomodule` - don't execute in browsers that support ES6 modules
+
+<small>[`<script>`: The Script element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) on MDN</small>
+</script></section><section  data-markdown><script type="text/template">
+## `<script type=module>`<br> also includes support for...
+
+- modules
+- async/await
+- Classes
+- arrow functions
+- fetch
+- Promises
+- Map, Set, and more!
+
+<small>[Deploying ES2015+ Code in Production Today](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)<small>
+
+<aside class="notes"><p>Browsers that support type=module also support these other ES6 features</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+## ~2017 major browsers started supporting `<script type=module>`
+
+<table class="table-no-borders">
+  <tbody>
+    <tr>
+      <td>
+        <img src="./images/safari.png" alt="Safari" width="200" style="border:none;box-shadow:none;"><br>
+        Safari 10.1*
+        <br><small><em>Mar 2017</em></small>
+      </td>
+      <td>
+        <img src="./images/chrome.png" alt="Chrome" width="200" style="border:none;box-shadow:none;"><br>
+        Chrome 61
+        <br><small><em>Sep 2017</em></small>
+      </td>
+      <td>
+        <img src="./images/firefox.png" alt="Firefox" width="200" style="border:none;box-shadow:none;"><br>
+        Firefox 60
+        <br><small><em>May 2018</em></small>
+      </td>
+      <td>
+        <img src="./images/edge.png" alt="Edge" width="190" style="border:none;box-shadow:none;"><br>
+        Edge 16
+        <br><small><em>Oct 2017</em></small>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<small>* Needs a `nomodule` workaround <p>[caniuse for `type=module`](https://caniuse.com/#feat=mdn-html_elements_script_type_module)</p></small>
+
+<aside class="notes"><p>was available in Firefox behind a flag in June 2017</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+`<script type=module>`
+
+<img src="./images/caniuse_module.png" alt="caniuse results for html script type=module" height="450px" style="border:none;">
+
+<small>[caniuse for `type=module`](https://caniuse.com/#feat=mdn-html_elements_script_type_module)</small>
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/MarketShare.svg" alt="Browser market shares" height="450px" style="border:none;">
+
+<small>[statcounter GlobalStats Browser Version Market Share Worldwide](https://gs.statcounter.com/browser-version-market-share#monthly-201810-201910-bar)</small>
+</script></section><section  data-markdown><script type="text/template">
+# Impact
+</script></section><section  data-markdown><script type="text/template">
+## Smaller size due to:
+
+- reduced number of polyfills
+- more efficient JS (less code)
+</script></section><section  data-markdown><script type="text/template">
+## Size Impact
+
+<table style="font-size:0.6em;">
+  <thead>
+    <tr>
+      <th>Site/App</th>
+      <th>ES2015+ / ES5 size <br /><small>(minified)</small></th>
+      <th>ES2015+ / ES5 size <br /><small>(minified + gzipped)</small></th>
+      <th>Size savings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>philipwalton.com</td>
+      <td>80K / 175K</td>
+      <td>21K / 43K</td>
+      <td>51-54%</td>
+    </tr>
+    <tr>
+      <td>jeremy.codes</td>
+      <td>34K / 112K</td>
+      <td>13K / 39K</td>
+      <td>66-70%</td>
+    </tr>
+    <tr>
+      <td>TodoMVC</td>
+      <td>8.4K / 11K</td>
+      <td></td>
+      <td>24%</td>
+    </tr>
+  </tbody>
+</table>
+
+<small>[Deploying ES2015+ Code in Production Today](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/), [Doing Differential Serving in 2019](https://calendar.perfplanet.com/2018/doing-differential-serving-in-2019/), [Smart Bundling: How To Serve Legacy Code Only To Legacy Browsers](https://www.smashingmagazine.com/2018/10/smart-bundling-legacy-code-browsers/)<small>
+</script></section><section  data-markdown><script type="text/template">
+## Time Impact
+
+Smaller size = Reduced load, parse, & eval time
+
+<table class="fragment fade-in-then-semi-out" style="font-size:0.6em;">
+  <thead>
+    <tr>
+      <th>Site/App</th>
+      <th>ES2015+ / ES5 size <br /><small>(minified)</small></th>
+      <th>ES2015+ / ES5 size <br /><small>(minified + gzipped)</small></th>
+      <th>Size savings</th>
+      <th>ES2015+ / ES5 parse/eval time (avg)</th>
+      <th>Parse/eval time savings</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>philipwalton.com</td>
+      <td>80K / 175K</td>
+      <td>21K / 43K</td>
+      <td>51-54%</td>
+      <td>172ms / 367ms</td>
+      <td>53%</td>
+    </tr>
+    <tr>
+      <td>jeremy.codes</td>
+      <td>34K / 112K</td>
+      <td>13K / 39K</td>
+      <td>66-70%</td>
+      <td>165ms / 466ms</td>
+      <td>65%</td>
+    </tr>
+    <tr>
+      <td>TodoMVC</td>
+      <td>8.4K / 11K</td>
+      <td></td>
+      <td>24%</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<small>[Deploying ES2015+ Code in Production Today](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/), [Doing Differential Serving in 2019](https://calendar.perfplanet.com/2018/doing-differential-serving-in-2019/), [Smart Bundling: How To Serve Legacy Code Only To Legacy Browsers](https://www.smashingmagazine.com/2018/10/smart-bundling-legacy-code-browsers/)<small>
+</script></section><section  data-markdown><script type="text/template">
+<h1 id="loading">Why do we care about size and time?</h1>
+</script></section><section  data-markdown><script type="text/template">
+> 53% of mobile sites are abandoned if pages take longer than 3 seconds to load.
+
+<small>2016 report by Doubleclick by Google</small>
+</script></section><section  data-markdown><script type="text/template">
+> Pinterest reduced load times by 40% and saw a 15% increase in sign ups.
+
+<small>https://wpostats.com/</small>
+</script></section><section  data-markdown><script type="text/template">
+> Starbucks implemented a 2x faster time to interactive resulting in a 65% increase in rewards registrations.
+
+<small>[Get Down to Business: Why the Web Matters (Chrome Dev Summit 2018)](https://www.youtube.com/watch?v=Xryhxi45Q5M&t=1113s&index=6&list=PLNYkxOF6rcIDjlCx1PcphPpmf43aKOAdF )</small>
+</script></section><section  data-markdown><script type="text/template">
+> Speed is now used as a ranking factor for mobile searches.
+
+<small>https://developers.google.com/web/updates/2018/07/search-ads-speed</small>
+</script></section><section  data-markdown><script type="text/template">
+The internet consumes 416.2 TWh of electricity per year. A 10% savings would be equivalent to:
+
+- 6.2 million fewer cars on the road <!-- .element: class="fragment fade-in-then-semi-out" -->
+- 32 billion less pounds of coal being burned <!-- .element: class="fragment fade-in-then-semi-out" -->
+- 486 million tree seedlings grown for 10 years <!-- .element: class="fragment fade-in-then-semi-out" -->
+
+<small>[How is your website impacting the planet?](https://www.websitecarbon.com/), [Greenhouse Gas Equivalencies Calculator](https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator)</small>
+
+<aside class="notes"><p>Most of the energy is consumed by the network and data center, not users&#39; devices.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+# How do we balance speed and support?
+</script></section><section  data-markdown><script type="text/template">
+**Differential serving** is the concept of serving modern, ES6+ code to modern browsers and legacy, transpiled code to legacy browsers.
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/diff-serving-options.svg" alt="Options for serving different bundles" style="border:none;box-shadow:none;">
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/script-module-option.svg" alt="Options for serving different bundles" style="border:none;box-shadow:none;">
+</script></section><section  data-markdown><script type="text/template">
+```html
+<!-- Browsers with ES module support load this file. -->
+<script type="module" src="/modern.js">__SCRIPT_END__
+
+<!-- Older browsers load this file (and module-supporting -->
+<!-- ones do not***). -->
+<script nomodule src="/legacy.js" defer>__SCRIPT_END__
+```
+</script></section><section  data-markdown><script type="text/template">
+## *** Oops
+
+- ✅ no browser executes twice (with the Safari hack) <!-- .element: class="fragment fade-in-then-semi-out" -->
+- ✅ modern Chrome and Firefox only fetch once <!-- .element: class="fragment fade-in-then-semi-out" -->
+- ⚠️ Safari <11 may or may not double fetch (unclear trigger) <!-- .element: class="fragment fade-in-then-semi-out" -->
+- ⚠️ Safari 11+ may still double fetch in some cases (see bug) <!-- .element: class="fragment fade-in-then-semi-out" -->
+- ❌ pre-2018 browsers do double fetches <!-- .element: class="fragment fade-in-then-semi-out" -->
+- ❌❌ latest Edge does triple fetch (2x module + 1x nomodule) <!-- .element: class="fragment fade-in-then-semi-out" -->
+
+<small>From [Will it double-fetch? Browser behavior with `module` / `nomodule` scripts](https://gist.github.com/jakub-g/5fc11af85a061ca29cc84892f1059fec) by jakub-g
+  <br>[Safari hack](https://gist.github.com/samthor/64b114e4a4f539915a95b91ffd340acc), [Safari bug](https://bugs.webkit.org/show_bug.cgi?id=194337)</small>
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/document-write-option.svg" alt="Options for serving different bundles" style="border:none;box-shadow:none;">
+</script></section><section  data-markdown><script type="text/template">
+```html
+<script>
+  var MODERN_BUNDLE = "assets/dist/js/scripts.modern.min.js";
+  var LEGACY_BUNDLE = "assets/dist/js/scripts.min.js";
+
+  function isModern() {
+    try {
+      new Function('import("")');
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  var scriptTag = document.createElement("script");
+  scriptTag.setAttribute("src", isModern() ? MODERN_BUNDLE : LEGACY_BUNDLE);
+  document.body.appendChild(scriptTag);
+__SCRIPT_END__
+```
+
+<small>Example code from [Should We All Start Implementing Differential Serving?](https://macarthur.me/posts/should-we-implement-differential-serving) by Alex MacArthur</small>
+</script></section><section  data-markdown><script type="text/template">
+## What's wrong with this approach?
+
+❌ Big latency performance penalty from breaking <br>**speculative parsing / preload scanning**
+</script></section><section  data-markdown><script type="text/template">
+Say we have some HTML like this:
+
+```html
+<script src="slider.js">__SCRIPT_END__
+<script src="animate.js">__SCRIPT_END__
+<script src="cookie.js">__SCRIPT_END__
+<img src="slide1.png">
+<img src="slide2.png">
+```
+
+<small>[Building the DOM faster: speculative parsing, async, defer and preload](https://hacks.mozilla.org/2017/09/building-the-dom-faster-speculative-parsing-async-defer-and-preload/) by Milica Mihajlija</small>
+</script></section><section  data-markdown><script type="text/template">
+## Pre-2008 HTML Parsing
+
+<img src="./images/old-parsing.png" alt="Waterfall for how HTML used to load resources" style="border:none;box-shadow:none;">
+
+<small>[Building the DOM faster: speculative parsing, async, defer and preload](https://hacks.mozilla.org/2017/09/building-the-dom-faster-speculative-parsing-async-defer-and-preload/) by Milica Mihajlija</small>
+</script></section><section  data-markdown><script type="text/template">
+## Modern HTML Parsing
+
+<img src="./images/speculative.png" alt="Waterfall for how HTML now loads resources" style="border:none;box-shadow:none;">
+
+<small>[Building the DOM faster: speculative parsing, async, defer and preload](https://hacks.mozilla.org/2017/09/building-the-dom-faster-speculative-parsing-async-defer-and-preload/) by Milica Mihajlija</small>
+
+<aside class="notes"><p>&quot;[Modern browsers] “speculatively” discover assets that will eventually be needed and start loading them in the background. So, embedded scripts have a huge leg up vs. those loaded by JS, which first have to wait for their time to come in the DOM-building process before they can even start downloading&quot;</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+<img src="./images/server-sniff-option.svg" alt="Options for serving different bundles" style="border:none;box-shadow:none;">
+</script></section><section  data-markdown><script type="text/template">
+## What's wrong with user-agent sniffing?
+
+- ❌ Not trivial and prone to false classification
+- ❌ New User Agent strings are added daily
+- ❌ Can't be used for static deployments
+- ❌ Bad for caching
+- ❌ [Mozilla will smite you](https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent#Considerations_before_using_browser_detection)
+
+<small>[Modern Script Loading](https://jasonformat.com/modern-script-loading/) by Jason Miller, [Smart Bundling: How To Serve Legacy Code Only To Legacy Browsers](https://www.smashingmagazine.com/2018/10/smart-bundling-legacy-code-browsers/) by Shubham Kanodia, [Cloudfront may even remove the header](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-user-agent-header)</small>
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/polyfill-option.svg" alt="Options for serving different bundles" style="border:none;box-shadow:none;">
+</script></section><section  data-markdown><script type="text/template">
+```html
+<!-- newer browsers won't load this bundle: -->
+<script nomodule src="polyfills.js">__SCRIPT_END__
+
+<!-- all browsers load this one: -->
+<script src="/bundle.js">__SCRIPT_END__
+```
+
+<aside class="notes"><p>&quot;worst-case is that the polyfills are loaded or possibly even executed (in Safari 10.1), but the effect is limited to &quot;over-polyfilling&quot;.&quot; Not sure how easy this would be in practice.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+<img src="./images/diff-serving-judge.svg" alt="Options for serving different bundles" style="border:none;box-shadow:none;">
+</script></section><section  data-markdown><script type="text/template">
+Problematic for Safari 10.1, modern Edge, and older versions of all:
+
+```html
+<!-- Browsers with ES module support load this file. -->
+<script type="module" src="/modern.js">__SCRIPT_END__
+
+<!-- Older browsers load this file (and module-supporting -->
+<!-- ones do not***). -->
+<script nomodule src="/legacy.js" defer>__SCRIPT_END__
+```
+</script></section><section  data-markdown><script type="text/template">
+Problematic for ~~Safari 10.1~~, modern Edge, and older versions of all:
+
+```html
+<!-- polyfill `nomodule` in Safari 10.1: -->
+<script type=module>
+!function(e,t,n){!("noModule"in(t=e.createElement("script")))&&
+  "onbeforeload"in t&&(n=!1,e.addEventListener("beforeload",function(e){
+  if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)
+  return;e.preventDefault()},!0),t.type="module",t.src=".",
+  e.head.appendChild(t),t.remove())}(document)
+__SCRIPT_END__
+
+<!-- Browsers with ES module support load this file. -->
+<script type="module" src="/modern.js">__SCRIPT_END__
+
+<!-- Older browsers load this file (and module-supporting -->
+<!-- ones do not***). -->
+<script nomodule src="/legacy.js" defer>__SCRIPT_END__
+```
+</script></section><section  data-markdown><script type="text/template">
+**"Problematic"** for ~~Safari 10.1~~, modern Edge, and older versions of all:
+
+```html
+<!-- polyfill `nomodule` in Safari 10.1: -->
+<script type=module>
+!function(e,t,n){!("noModule"in(t=e.createElement("script")))&&
+  "onbeforeload"in t&&(n=!1,e.addEventListener("beforeload",function(e){
+  if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)
+  return;e.preventDefault()},!0),t.type="module",t.src=".",
+  e.head.appendChild(t),t.remove())}(document)
+__SCRIPT_END__
+
+<!-- Browsers with ES module support load this file. -->
+<script type="module" src="/modern.js">__SCRIPT_END__
+
+<!-- Older browsers load this file (and module-supporting -->
+<!-- ones do not***). -->
+<script nomodule src="/legacy.js" defer>__SCRIPT_END__
+```
+
+<aside class="notes"><p>If we consider that most of these users are on desktops, then how much of a price is it to download more bytes for these small percentage of desktop users?</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+## So how many people are using modules?
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/almanac type module.png" alt="Uses type=module" height="500" style="border:none;">
+
+<small><a href="https://almanac.httparchive.org/en/2019/javascript">Web Almanac by HTTP Archive - JavaScript chapter</a></small>
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/caniuse_module.png" alt="caniuse results for html script type=module" height="450px" style="border:none;">
+
+<small>[caniuse for `type=module`](https://caniuse.com/#feat=mdn-html_elements_script_type_module)</small>
+</script></section><section  data-markdown><script type="text/template">
+# 😳
+
+<aside class="notes"><p>Raise your hand again if you&#39;re transpiling your JS to ES5 for 100% of users. Now raise your hand if you would say your website is accessible.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+<!-- .slide: data-background="./images/gleason.jpg" -->
+
+<h1 class="dark-background"><span class="highlighter">61 million, or 26% of adults in the U.S. live with a disability</span></h1>
+
+<small><span class="highlighter">[Donate to Team Gleason](https://teamgleason.org/donate/)</span></small>
+</script></section><section  data-markdown><script type="text/template">
+<img src="./images/us-disabilities.png" alt="Disabilities in adults in the U.S." height="500" style="border:none;">
+
+<small><a href="https://www.cdc.gov/ncbddd/disabilityandhealth/infographic-disability-impacts-all.html">CDC: Disability Impacts All of Us</a></small>
+</script></section><section  data-markdown><script type="text/template">
+> The WCAG failure rate for home pages was at least 97.8%.
+
+[The WebAIM Million: What we learned analyzing 1,000,000 web site home pages](https://webaim.org/blog/webaim-million/)
+
+<aside class="notes"><p>Low contrast text was the most common detectable issue with an average of 36 instances of low contrasts text on each home page. One-third of all images (12.3 images per page on average) were missing alternative text. 59% of form inputs were not properly labeled.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+<!-- .slide: data-background="./images/glasses_2500.jpg" -->
+
+<h1 class="dark-background"><span class="highlighter">Why are we prioritizing backward compatibility over accessibility?</span></h1>
+
+
+<aside class="notes"><p>Photo by Josh Calabrese on Unsplash</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+<!-- .slide: data-background="./images/hero_bg.jpg" -->
+<h1 class="title dark-background">Thanks!</h1>
+Resources, and more at <a href="http://bit.ly/vintagebundles" class="dark-background">bit.ly/vintagebundles</a>
+</script></section><section  data-markdown><script type="text/template">
+# Hands-on walk through
+
+Start with the `4-code-splitting` branch of [github.com/siakaramalegos/markdown-viewer](https://github.com/siakaramalegos/markdown-viewer)
+</script></section><section  data-markdown><script type="text/template">
+## Generating modern + legacy bundles
+
+- 2 different [Browserslist](https://github.com/browserslist/browserslist) configs, which feed into
+- 2 different [Babel](https://babeljs.io/) configs, which feed into
+- 2 different [Webpack](https://webpack.js.org/) configs
+</script></section><section  data-markdown><script type="text/template">
+## What's Babel + Browserslist doing?
+
+1. Run Bundle Analyzer on prod to see our starting bundle size. Run the coverage checker in DevTools to see some of the unused code. Much of this is polyfills.
+2. Update `.babelrc` to add debug:
+  ```diff
+   {
+    "presets": [
+  -    "@babel/preset-env",
+  +    [
+  +      "@babel/preset-env",
+  +      {
+  +        "debug": true
+  +      }
+  +    ]
+    ],
+    "plugins": [
+      "@babel/plugin-syntax-dynamic-import",
+  ```
+</script></section><section  data-markdown><script type="text/template">
+## Differential Serving Exercise 1: What's Babel doing?
+
+- Run `npm start` and look for the targets in terminal log:
+  ```bash
+  Using targets:
+  {
+    "android": "4.4.3",
+    "chrome": "49",
+    "edge": "17",
+    "firefox": "65",
+    "ie": "11",
+    "ios": "10.3",
+    "opera": "58",
+    "safari": "5.1",
+    "samsung": "4"
+  }
+  ```
+- Notice this - it means it's importing ALL of babel/polyfill:
+```bash
+Using polyfills: No polyfills were added, since the `useBuiltIns`
+option was not set.
+```
+</script></section><section  data-markdown><script type="text/template">
+## Differential Serving Exercise 2: Better polyfills
+
+1. Limit the polyfills to only match the targeted browsers:
+  ```diff
+       {
+         "debug": true
+  +      "useBuiltIns": "entry"
+       }
+  ```
+2. Limit the polyfills to only match those used:
+  ```diff
+  -      "useBuiltIns": "entry"
+  +      "useBuiltIns": "usage"
+  ```
+3. Delete `import "@babel/polyfill";` from index.js.
+4. Narrow the browsers supported to NOT include IE `.browserslistrc`:
+  ```bash
+  >0.25%
+  not IE 11
+  ```
+</script></section><section  data-markdown><script type="text/template">
+## Differential Serving Exercise 3: Hold on to your butts
+
+1. Add new dependencies:
+  ```bash
+  npm i --save core-js
+  npm i --save-dev webpack-merge script-ext-html-webpack-plugin
+  ```
+2. Create webpack.common.js and move most of our config there except the JS rules and the `output` property.
+3. In webpack.config.js, import merge and common:
+  ```javascript
+  const merge = require('webpack-merge')
+  const common = require('./webpack.common.js')
+  ```
+4. Merge it with our existing `output` and JS rules to make sure it works before moving forward.
+</script></section><section  data-markdown><script type="text/template">
+Create separate Babel configs for legacy and modernJS parts of the config for modern and legacy...
+
+```javascript
+// babel.legacy.js
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        corejs: 3,
+        modules: false,
+        useBuiltIns: "usage",
+        targets: "last 2 versions, > 0.2%, not dead"
+      }
+    ]
+  ],
+  plugins: [
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-runtime"
+  ]
+}
+```
+</script></section><section  data-markdown><script type="text/template">
+Also, delete .babelrc.
+
+```javascript
+// babel.modern.js
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        // corejs: 3,
+        modules: false,
+        // useBuiltIns: "usage",
+        targets: { esmodules: true }
+      }
+    ]
+  ],
+    plugins: [
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-transform-runtime"
+    ]
+}
+```
+</script></section><section  data-markdown><script type="text/template">
+Create separate webpack configs for modern and legacy in webpack.config.js:
+
+```javascript
+const legacyConfig = merge(common, {
+  output: {
+    filename: '[name].js',
+    path: path.resolve('./dist')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: [/node_modules/],
+        use: {
+          loader: 'babel-loader',
+          options: babelLegacy,
+        }
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [new TerserJSPlugin({})],
+  },
+})
+```
+</script></section><section  data-markdown><script type="text/template">
+```javascript
+const modernConfig = merge(common, {
+  output: {
+    filename: '[name].mjs',
+    path: path.resolve('./dist')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: [/node_modules/],
+        use: {
+          loader: 'babel-loader',
+          options: babelModern,
+        }
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new TerserJSPlugin({
+        test: /\.m?js(\?.*)?$/i,
+        terserOptions: {
+          ecma: 6 // This can be set to 7 or 8, too.
+        }
+      }),
+    ],
+  },
+})
+
+module.exports = [ legacyConfig, modernConfig ]
+```
+</script></section><section  data-markdown><script type="text/template">
+## Tada! Oops...
+
+<aside class="notes"><p>What is the first step run in the build process? Clean! We need to edit this so it doesn&#39;t keep deleting the first build that is run when starting the second build. One quick fix is editing the script by adding <code>rm -rf build &amp;&amp;</code> and deleting the clean-webpack-plugin stuff.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+What is the first step run in the build process? Clean!
+
+We need to edit this so it doesn't keep deleting the first build that is run when starting the second build.
+
+One quick fix is editing the script by adding `rm -rf build &&` and deleting the clean-webpack-plugin stuff.
+</script></section></div>
+    </div>
+
+    <script src="./js/reveal.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // Optional libraries used to extend on reveal.js
+      var deps = [
+        { src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+        { src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+        { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: './plugin/zoom-js/zoom.js', async: true },
+        { src: './plugin/notes/notes.js', async: true },
+        { src: './plugin/math/math.js', async: true }
+      ];
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        dependencies: deps
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal.getQueryHash() || {};
+
+      var options = extend(defaultOptions, {}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
