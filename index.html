@@ -6,7 +6,7 @@
 
     <title>reveal-md</title>
     <link rel="stylesheet" href="./css/reveal.css" />
-    <link rel="stylesheet" href="./css/style.css" id="theme" />
+    <link rel="stylesheet" href="./_assets/style.css" id="theme" />
     <link rel="stylesheet" href="./css/highlight/github.css" />
     <link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print" />
 
@@ -464,7 +464,7 @@ Start with the `4-code-splitting` branch of [github.com/siakaramalegos/markdown-
       "@babel/plugin-syntax-dynamic-import",
   ```
 </script></section><section  data-markdown><script type="text/template">
-## Differential Serving Exercise 1: What's Babel doing?
+## What's Babel doing?
 
 - Run `npm start` and look for the targets in terminal log:
   ```bash
@@ -481,49 +481,84 @@ Start with the `4-code-splitting` branch of [github.com/siakaramalegos/markdown-
     "samsung": "4"
   }
   ```
-- Notice this - it means it's importing ALL of babel/polyfill:
+- Notice this:
 ```bash
 Using polyfills: No polyfills were added, since the `useBuiltIns`
 option was not set.
 ```
-</script></section><section  data-markdown><script type="text/template">
-## Differential Serving Exercise 2: Better polyfills
 
-1. Limit the polyfills to only match the targeted browsers:
+<small>[`useBuiltIns` docs](https://babeljs.io/docs/en/babel-preset-env#usebuiltins)</small>
+
+<aside class="notes"><p>The default is false so not using polyfills</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+## Add polyfills
+
+1. Add core-js for polyfills
+  ```
+  $ npm install --save core-js@3.4.7
+  ```
+2. Add core-js to the entry point
+  ```javascript
+  // src/index.js
+  import 'core-js';
+  ```
+3. Limit the polyfills to only match the targeted browsers:
   ```diff
        {
          "debug": true
   +      "useBuiltIns": "entry"
+  +      "corejs": "3.4.7"
        }
   ```
-2. Limit the polyfills to only match those used:
+</script></section><section  data-markdown><script type="text/template">
+## `"useBuiltIns": "entry"`
+
+Our import gets replaced with imports needed for our target browsers. For example, for Chrome 71:
+
+```javascript
+// src/index.js
+import 'core-js';
+```
+
+changes to:
+
+```javascript
+// src/index.js
+import "core-js/modules/es.array.unscopables.flat";
+import "core-js/modules/es.array.unscopables.flat-map";
+import "core-js/modules/es.object.from-entries";
+import "core-js/modules/web.immediate";
+```
+
+<small>[core-js](https://github.com/zloirock/core-js)</small>
+
+<aside class="notes"><p>But what if we don&#39;t use all the features that need those polyfills?</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+## Better polyfills
+
+1. Limit the polyfills to only match those used:
   ```diff
   -      "useBuiltIns": "entry"
   +      "useBuiltIns": "usage"
   ```
-3. Delete `import "@babel/polyfill";` from index.js.
-4. Narrow the browsers supported to NOT include IE `.browserslistrc`:
-  ```bash
-  >0.25%
-  not IE 11
-  ```
+2. Remove `import 'core-js';` from **src/index.js**
+3. How did the bundle change?
 </script></section><section  data-markdown><script type="text/template">
-## Differential Serving Exercise 3: Hold on to your butts
+## Differential Serving: Setting up
 
 1. Add new dependencies:
   ```bash
-  npm i --save core-js
   npm i --save-dev webpack-merge script-ext-html-webpack-plugin
   ```
-2. Create webpack.common.js and move most of our config there except the JS rules and the `output` property.
-3. In webpack.config.js, import merge and common:
+2. Create **webpack.common.js** and move most of our config there except the JS rules and the `output` property.
+3. In **webpack.config.js**, import merge and common:
   ```javascript
   const merge = require('webpack-merge')
   const common = require('./webpack.common.js')
   ```
 4. Merge it with our existing `output` and JS rules to make sure it works before moving forward.
 </script></section><section  data-markdown><script type="text/template">
-Create separate Babel configs for legacy and modernJS parts of the config for modern and legacy...
+Create a **legacy** Babel config based off of our **.babelrc**, and then delete **.babelrc**:
 
 ```javascript
 // babel.legacy.js
@@ -532,10 +567,8 @@ module.exports = {
     [
       "@babel/preset-env",
       {
-        corejs: 3,
-        modules: false,
         useBuiltIns: "usage",
-        targets: "last 2 versions, > 0.2%, not dead"
+        corejs: "3.4.7",
       }
     ]
   ],
@@ -546,7 +579,7 @@ module.exports = {
 }
 ```
 </script></section><section  data-markdown><script type="text/template">
-Also, delete .babelrc.
+Create a **modern** Babel config targeting ES modules:
 
 ```javascript
 // babel.modern.js
@@ -555,9 +588,7 @@ module.exports = {
     [
       "@babel/preset-env",
       {
-        // corejs: 3,
         modules: false,
-        // useBuiltIns: "usage",
         targets: { esmodules: true }
       }
     ]
@@ -568,8 +599,12 @@ module.exports = {
     ]
 }
 ```
-</script></section><section  data-markdown><script type="text/template">
-Create separate webpack configs for modern and legacy in webpack.config.js:
+
+<small>`@babel/preset-env` docs for [`modules`](https://babeljs.io/docs/en/babel-preset-env#modules) and [`targets.esmodules`](https://babeljs.io/docs/en/babel-preset-env#targetsesmodules)</small>
+
+<aside class="notes"><p>will ignore browser targets by default</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+Create separate webpack configs for modern and legacy in **webpack.config.js**:
 
 ```javascript
 const legacyConfig = merge(common, {
@@ -624,7 +659,12 @@ const modernConfig = merge(common, {
     ],
   },
 })
+```
+</script></section><section  data-markdown><script type="text/template">
+Export them both as an array for webpack to build both:
 
+```javascript
+// webpack.config.js
 module.exports = [ legacyConfig, modernConfig ]
 ```
 </script></section><section  data-markdown><script type="text/template">
@@ -632,11 +672,30 @@ module.exports = [ legacyConfig, modernConfig ]
 
 <aside class="notes"><p>What is the first step run in the build process? Clean! We need to edit this so it doesn&#39;t keep deleting the first build that is run when starting the second build. One quick fix is editing the script by adding <code>rm -rf build &amp;&amp;</code> and deleting the clean-webpack-plugin stuff.</p>
 </aside></script></section><section  data-markdown><script type="text/template">
-What is the first step run in the build process? Clean!
+## Add the scripts to the html!
 
-We need to edit this so it doesn't keep deleting the first build that is run when starting the second build.
+1. Manually add in our modern script at the bottom of **src/index.html**
+  ```html
+  <script type="module" src="main.mjs">__SCRIPT_END__
+  ```
+2. Add a plugin to generate the correct script tag for our legacy script into **webpack.common.js**
+  ```javascript
+  const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+  ```
 
-One quick fix is editing the script by adding `rm -rf build &&` and deleting the clean-webpack-plugin stuff.
+  ```javascript
+  // add to plugins array:
+  new ScriptExtHtmlWebpackPlugin({
+    module: /\.mjs$/,
+    custom: [
+      {
+        test: /\.js$/,
+        attribute: 'nomodule',
+        value: ''
+      },
+    ]
+  })
+  ```
 </script></section></div>
     </div>
 
