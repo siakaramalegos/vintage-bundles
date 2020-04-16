@@ -397,3 +397,17 @@ table.fixed-two-column td {
 .reveal table.table-no-borders td {
   border: none;
 }
+#spinner {
+  animation: spin 2s linear infinite;
+  opacity: 0.7;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.reveal a.link-secondary {
+  color: #b83100;
+}
+.reveal a.link-secondary:hover {
+  color: #e03c00;
+}

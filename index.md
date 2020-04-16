@@ -2,6 +2,8 @@
 theme: style.css
 verticalSeparator: ---
 highlightTheme: github
+revealOptions:
+  transition: none
 ---
 
 
@@ -15,7 +17,7 @@ Note: Photo by Erwan Hesry on Unsplash https://unsplash.com/photos/Q34YB7yjAxA
 
 ## hi, i'm sia
 
-⚡ 👩🏻‍💻 🇬🇷 🐶 🐺 🎨 📓 ✈️
+<a href="https://sia.codes/" class="link-secondary">sia.codes</a>
 
 <img src="./images/sia.gif" alt="Sia at Mardi Gras" height="450px" style="border:none;">
 
@@ -225,7 +227,15 @@ Smaller size = Reduced load, parse, & eval time
 
 ---
 
-<h1 id="loading">Why do we care about size and time?</h1>
+# Why do we care about size and time?
+
+---
+
+<svg width="100" id="spinner" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#00A6BF" d="M288 39.056v16.659c0 10.804 7.281 20.159 17.686 23.066C383.204 100.434 440 171.518 440 256c0 101.689-82.295 184-184 184-101.689 0-184-82.295-184-184 0-84.47 56.786-155.564 134.312-177.219C216.719 75.874 224 66.517 224 55.712V39.064c0-15.709-14.834-27.153-30.046-23.234C86.603 43.482 7.394 141.206 8.003 257.332c.72 137.052 111.477 246.956 248.531 246.667C393.255 503.711 504 392.788 504 256c0-115.633-79.14-212.779-186.211-240.236C302.678 11.889 288 23.456 288 39.056z" class=""></path></svg>
+
+---
+
+# User experience! 👩🏻‍💻
 
 ---
 
@@ -265,6 +275,12 @@ Note: Most of the energy is consumed by the network and data center, not users' 
 
 ---
 
+<img src="./images/shame.png" alt="Message on slower sites to users saying 'Usually loads slow'" height="500px" style="border:none;box-shadow:none;">
+
+<small>[Moving towards a faster web](https://blog.chromium.org/2019/11/moving-towards-faster-web.html)</small>
+
+---
+
 # How do we balance speed and support?
 
 ---
@@ -300,6 +316,7 @@ Note: Most of the energy is consumed by the network and data center, not users' 
 - ⚠️ Safari 11+ may still double fetch in some cases (see bug) <!-- .element: class="fragment fade-in-then-semi-out" -->
 - ❌ pre-2018 browsers do double fetches <!-- .element: class="fragment fade-in-then-semi-out" -->
 - ❌❌ latest Edge does triple fetch (2x module + 1x nomodule) <!-- .element: class="fragment fade-in-then-semi-out" -->
+- ✅ new Edge on Chromium only fetches once! <!-- .element: class="fragment fade-in-then-semi-out" -->
 
 <small>From [Will it double-fetch? Browser behavior with `module` / `nomodule` scripts](https://gist.github.com/jakub-g/5fc11af85a061ca29cc84892f1059fec) by jakub-g
   <br>[Safari hack](https://gist.github.com/samthor/64b114e4a4f539915a95b91ffd340acc), [Safari bug](https://bugs.webkit.org/show_bug.cgi?id=194337)</small>
@@ -443,7 +460,7 @@ Problematic for ~~Safari 10.1~~, modern Edge, and older versions of all:
 
 ---
 
-**"Problematic"** for ~~Safari 10.1~~, modern Edge, and older versions of all:
+**"Problematic"** for ~~Safari 10.1~~, ~~Edge~~ (not Chromium!), and older versions of all:
 
 ```html
 <!-- polyfill `nomodule` in Safari 10.1: -->
@@ -474,6 +491,12 @@ Note: If we consider that most of these users are on desktops, then how much of 
 <img src="./images/almanac type module.png" alt="Uses type=module" height="500" style="border:none;">
 
 <small><a href="https://almanac.httparchive.org/en/2019/javascript">Web Almanac by HTTP Archive - JavaScript chapter</a></small>
+
+---
+
+## Adoption of script modules
+
+<img src="./images/chart.svg" alt="Uses type=module" height="500" style="border:none;">
 
 ---
 
@@ -521,8 +544,11 @@ Note: Photo by Josh Calabrese on Unsplash
 ---
 
 <!-- .slide: data-background="./images/hero_bg.jpg" -->
-<h1 class="title dark-background">Thanks!</h1>
-Resources, and more at <a href="http://bit.ly/vintagebundles" class="dark-background">bit.ly/vintagebundles</a>
+<h1 class="title dark-background" style="text-align:left;">Thanks!</h1>
+
+<p style="color:#333;text-align:left;">Slides:<br> <a href="http://bit.ly/vintagebundles" class="link-secondary">bit.ly/vintagebundles</a></p>
+<p style="color:#333;text-align:left;">30 Days of Web Perf:<br> <a href="http://bit.ly/30-days-web-perf" class="link-secondary">bit.ly/30-days-web-perf</a></p>
+<p style="color:#333;text-align:left;">Writing, resources, and more:<br> <a href="https://sia.codes/" class="link-secondary">sia.codes</a></p>
 
 ---
 
